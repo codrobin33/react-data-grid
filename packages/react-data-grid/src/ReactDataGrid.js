@@ -196,7 +196,11 @@ const ReactDataGrid = React.createClass({
   },
 
   onCellClick: function(cell: SelectedType) {
-    this.onSelect({rowIdx: cell.rowIdx, idx: cell.idx});
+    if (this.props.enableCellSelect === true) {
+      this.onSelect({rowIdx: cell.rowIdx, idx: cell.idx});
+    } else {
+      this.onSelect({rowIdx: cell.rowIdx, idx: -1});
+    }
 
     if (this.props.onRowClick && typeof this.props.onRowClick === 'function') {
       this.props.onRowClick(cell.rowIdx, this.props.rowGetter(cell.rowIdx));
